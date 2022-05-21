@@ -1,8 +1,15 @@
 # AutoSign
 
 #### 介绍
+![](https://img.shields.io/badge/python-v3.10.4-blue) 
 
 自动签到各种应用脚本
+
+[github仓库](https://github.com/clover1420/AutoSign)
+
+[gitee仓库](https://gitee.com/clover1314/auto-sign)
+
+目前支持 <a href="https://miuiver.com/"><font color=#FF4500>MIUI历史版本</font></a>
 
 # 使用
 1. 下载本项目

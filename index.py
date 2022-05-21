@@ -7,5 +7,4 @@ def main_handler(event,context):
 
 # -------  本地调试启动模块  --------#
 if __name__ == '__main__':
-    #print(run())
     run()
