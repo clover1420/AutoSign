@@ -1,37 +1,35 @@
 # AutoSign
 
 #### 介绍
-自动签到脚本
 
-#### 软件架构
-软件架构说明
+自动签到各种应用脚本
 
+# 使用
+1. 下载本项目
 
-#### 安装教程
+2. 解压本项目压缩包,在解压目录中**Shift+右键** 打开你的命令提示符cmd或powershell
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+3. 执行 `pip install -r requirements.txt` 安装模块
 
-#### 使用说明
+4. 打开目录中的**config.py**文件，填写cookie。
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+5. 运行**index.py**文件。
 
-#### 参与贡献
+# 使用腾讯云函数运行
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+1. 打开并登录[云函数控制台](https://console.cloud.tencent.com/scf/list)。
 
+2. 新建云函数 - 自定义创建，函数类型选`事件函数`，部署方式选`代码部署`，运行环境选 `Python3.6`.
 
-#### 特技
+3. 提交方法选`本地上传文件夹`，并在下方的函数代码处上传整个项目文件夹。
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+4. 执行方法填写 `index.main_handler`.
+
+5. 展开高级配置，将执行超时时间修改为 `300 秒`，其他保持默认。
+
+6. 展开触发器配置，选中自定义创建，触发周期选择`自定义触发周期`，并填写表达式`0 0 7 * * * *`（此处为每天上午 7 时运行一次，可以自行修改）
+
+7. 完成
+
+# cookie 获取
+MIUI 历史版本只需要账号,密码，不需要cookie  
