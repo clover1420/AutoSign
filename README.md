@@ -1,6 +1,4 @@
-# AutoSign
-
-#### 介绍
+# 介绍
 ![](https://img.shields.io/badge/python-v3.10.4-blue) 
 
 自动签到各种应用脚本
