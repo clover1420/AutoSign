@@ -11,6 +11,10 @@ class Push():
         self.qmsg_key = push['PushKey']['Qmsg']
         self.Server_key = push['PushKey']['Server']
         self.PushMode = push['PushMode']
+        self.EnterpriseId = push['PushKey']['Epwc']['EnterpriseId']
+        self.AppId = push['PushKey']['Epwc']['AppId']
+        self.AppSecret = push['PushKey']['Epwc']['AppSecret']
+        self.UserUid = push['PushKey']['Epwc']['UserUid']
         self.msg = msg
 
     #qmsg酱推送
@@ -40,10 +44,35 @@ class Push():
                 "desp":self.msg
             }
             zz = requests.post(url=Server_url,data=data).json()
-            if zz['code'] == "0":
+            log.info(zz)
+            if zz['code'] == 0:
                 log.info("Server推送成功")
             else:
                 log.info("Server推送失败"+zz['message'])
+    
+    # 企业微信推送
+    def Epwc(self):
+        try:
+            def GetToken():
+                url = f'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={self.EnterpriseId}&corpsecret={self.AppSecret}&debug=1'
+                response = requests.get(url=url).json()
+                return response['access_token']
+            url = f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={GetToken()}"
+            body = {
+                "touser" : self.UserUid,
+                "msgtype" : "text",
+                "agentid" : int(self.AppId),
+                "text" : {"content" : self.msg},
+                "safe":0,
+                "duplicate_check_interval": 1800
+            }
+            response = requests.post(url=url,json=body).json()
+            if response['errcode'] == 0:
+                log.info("企业微信推送成功")
+            else:
+                log.info("企业微信推送失败")
+        except Exception as e:
+            log.info(f"企业微信推送时出现错误,错误码:{e}")
 
     def push(self):
         if self.PushMode == "" or self.PushMode == "False":
@@ -52,5 +81,7 @@ class Push():
             self.Qmsg()
         elif self.PushMode == "server":
             self.Server()
+        elif self.PushMode == "epwc":
+            self.Epwc()
         else:
             log.info("推送配置错误")

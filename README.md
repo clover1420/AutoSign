@@ -11,7 +11,7 @@
 
 <a href="https://miuiver.com/">MIUI历史版本</a> 的每日签到得积分
 
-<a href="https://www.3839.com/">好游快报</a>的每日爆米花浇水
+<a href="https://www.3839.com/">好游快报</a> 的每日爆米花浇水
 
 # 使用
 1. 下载本项目

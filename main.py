@@ -15,4 +15,4 @@ def run():
         data = data+"\n"+gtfeds.Sign()
     ts = Push(data,push)
     ts.push()
-    log.info(data)
+    log.info("\n"+data)
