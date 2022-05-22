@@ -46,8 +46,11 @@ class Push():
                 log.info("Server推送失败"+zz['message'])
 
     def push(self):
-        if self.PushMode == "qmsg":
+        if self.PushMode == "" or self.PushMode == "False":
+            log.info("配置了不进行推送")
+        elif self.PushMode == "qmsg":
             self.Qmsg()
         elif self.PushMode == "server":
             self.Server()
-
+        else:
+            log.info("推送配置错误")

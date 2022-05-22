@@ -7,7 +7,11 @@
 
 [gitee仓库](https://gitee.com/clover1314/auto-sign)
 
-目前支持 <a href="https://miuiver.com/"><font color=#FF4500>MIUI历史版本</font></a>
+### 目前支持：
+
+<a href="https://miuiver.com/">MIUI历史版本</a> 的每日签到得积分
+
+<a href="https://www.3839.com/">好游快报</a>的每日爆米花浇水
 
 # 使用
 1. 下载本项目
@@ -37,4 +41,11 @@
 7. 完成
 
 # cookie 获取
-MIUI 历史版本只需要账号,密码，不需要cookie  
+
+### MIUI历史版本
+
+1. 只需要账号,密码，不需要cookie  
+
+### 好游快爆
+
+1. 用手机进行抓包复制请求体里面的的数据填入好游快爆的cookie

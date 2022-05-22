@@ -1,13 +1,14 @@
-import requests,logging
+import requests
 from src.log import Log
 
 log = Log()
+
 class gtfed():
-    """好游快报签到
+    """好游快爆签到
     """
     url = 'https://huodong3.3839.com/n/hykb/grow/ajax.php'
     def __init__(self,SignToken) -> None:
-        self.gtfed = SignToken['gtfed']
+        self.gtfed = SignToken['gtfed']['cookie']
         self.head = {
             "User-Agent":"Mozilla/5.0 (Linux; Android 7.0; Meizu S6 Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/65.0.3325.110 Mobile Safari/537.36Androidkb/1.5.5.305(android;Meizu S6;7.0;720x1374;4G);@4399_sykb_android_activity@",
             "Origin":"https://huodong3.3839.com",
@@ -15,21 +16,28 @@ class gtfed():
             "Content-Type":"application/x-www-form-urlencoded; charset=UTF-8",
             "Referer":"https://huodong3.3839.com/n/hykb/grow/index.php",
 	    }
-        self.data = f'ac=Watering&r=0.1399304193190738&scookie={self.gtfed}'
         
-    def qd(self):
-        zz = requests.post(url=self.url,data=self.data,headers=self.head).json()
-        if zz['key'] == 'Ok':
-            if zz['csd_jdt'] == "100%":
-                pass
+    def Sign(self):
+        if self.gtfed != "":
+            zz = requests.post(url=self.url,data=self.gtfed,headers=self.head).json()
+            if zz['key'] == 'Ok':
+                if zz['csd_jdt'] == "100%":
+                    log.info("好游快爆:爆米进度已满")
+                    return "好游快爆:爆米进度已满"
+                else:
+                    log.info("好游快爆:签到成功")
+                    return "好游快爆:签到成功"
             else:
-                log.info("好游快报:签到成功")
-                return "好游快报:签到成功"
+                log.info(f"好游快爆:{zz['info']}")
+                return f"好游快爆:{zz['info']}"
         else:
-            log.info(f"好游快报:{zz['info']}")
-            return f"好游快报:{zz['info']}"
+            log.info("好游快爆:cookie为空")
+            return "好游快爆:cookie为空"
+            
 #MIUI 历史版本签到
 class Miui():
+    """MIUI 历史版本签到
+    """
     LoginUrl = "https://miuiver.com/wp-content/plugins/erphplogin//action/login.php"
     SignUrl = "https://miuiver.com/wp-admin/admin-ajax.php"
     def __init__(self,SignToken) -> None:
@@ -40,7 +48,7 @@ class Miui():
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'Accept': 'application/json, text/javascript, */*; q=0.01'
         }
-
+    #登录
     def Login(self):
         datas = {
             'log':self.user,
@@ -59,7 +67,7 @@ class Miui():
             return cookies
         else:
             log.info("MIUI历史版本:登录失败,账号或密码错误")
-
+    #签到
     def Sign(self):
         datas = {
             'action': 'epd_checkin'
@@ -78,3 +86,4 @@ class Miui():
                     return "MIUI历史版本:" + response["msg"]
         else:
             log.info("MIUI历史版本:账号或密码为空")
+            return "MIUI历史版本:账号或密码为空"
