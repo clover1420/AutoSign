@@ -37,5 +37,12 @@ SignToken = {
         "switch":True,
         "user":"",
         "password":""
+    },
+    # 小黑盒签到
+    "XiaoHeiHe":{
+        "switch":True,
+        "cookie":"",
+        "imei":""
     }
+
 }

@@ -1,7 +1,7 @@
 from src.log import Log
 from src.Push import Push
 from config import push,SignToken
-from src.Sign import gtfed,Miui
+from src.Sign import gtfed,Miui,XiaoHeiHe
 
 log = Log()
 
@@ -13,6 +13,9 @@ def run():
     if SignToken['gtfed']['switch']:
         gtfeds = gtfed(SignToken)
         data = data+"\n"+gtfeds.Sign()
+    if SignToken['XiaoHeiHe']['switch']:
+        xiaoheihe = XiaoHeiHe(SignToken)
+        data = data+"\n"+xiaoheihe.Sgin()
     ts = Push(data,push)
     ts.push()
     log.info("\n"+data)

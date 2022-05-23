@@ -24,7 +24,7 @@ class Push():
         else:
             try:
                 qmsg_url = f'https://qmsg.zendee.cn/send/{self.qmsg_key}'
-                data = {'msg': "米游社原神签到\n"+self.msg}
+                data = {'msg': self.msg}
                 zz = requests.post(url=qmsg_url,data=data).json()
                 if zz['code'] == 0:
                     log.info("qmsg酱"+zz['reason'])
@@ -44,7 +44,6 @@ class Push():
                 "desp":self.msg
             }
             zz = requests.post(url=Server_url,data=data).json()
-            log.info(zz)
             if zz['code'] == 0:
                 log.info("Server推送成功")
             else:

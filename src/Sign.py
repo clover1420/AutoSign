@@ -1,4 +1,6 @@
 import requests
+import random
+import time
 from src.log import Log
 
 log = Log()
@@ -87,3 +89,70 @@ class Miui():
         else:
             log.info("MIUI历史版本:账号或密码为空")
             return "MIUI历史版本:账号或密码为空"
+
+# 小黑盒签到
+class XiaoHeiHe():
+    def __init__(self,SignToken) -> None:
+        self.Xiaoheihe = SignToken['XiaoHeiHe']['cookie']
+        self.imei = SignToken['XiaoHeiHe']['imei']
+        self.n = self.get_nonce_str()
+        self.t = int(time.time())
+        self.u = "/task/sign"
+
+    def get_nonce_str(self,length: int = 32) -> str:
+            """
+            生成随机字符串
+
+            参数:
+                length: 密钥参数
+            返回:
+                str: 随机字符串
+            """
+            source = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            result = "".join(random.choice(source) for _ in range(length))
+            return(result)
+
+    # 感谢 https://github.com/chr233 的hkey算法接口
+    def hkey(self):
+        url = "http://146.56.234.178:8077/encode"
+        params={"urlpath": self.u, "nonce": self.n, "timestamp": self.t}
+        zz = requests.get(url,params=params).text
+        return zz
+    
+    def Sgin(self):
+        if self.Xiaoheihe != "":
+            try:
+                url = "https://api.xiaoheihe.cn/task/sign/"
+                p = {
+                    "_time":self.t,
+                    "hkey":self.hkey(),
+                    "nonce":self.n,
+                    "imei":self.imei,
+                    "heybox_id":"15083711",
+                    "version":"1.3.221",
+                    "divice_info":"M2012K11AC",
+                    "x_app":"heybox",
+                    "channel":"heybox_xiaomi",
+                    "os_version":"12",
+                    "os_type":"Android"
+                }
+                head = {
+                    "User-Agent":"Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36 ApiMaxJia/1.0",
+                    "cookie":self.Xiaoheihe,
+                    "Referer":"http://api.maxjia.com/"
+                }
+                req = requests.get(url=url,params=p,headers=head).json()
+                if req['status'] == "ok":
+                    if req['msg'] == "":
+                        log.info("小黑盒:已经签到过了")
+                        return "小黑盒:已经签到过了"
+                    else:
+                        log.info(f"小黑盒:{req['msg']}")
+                        return f"小黑盒:{req['msg']}"
+                else:
+                    log.info("小黑盒:签到失败")
+                    return "小黑盒:签到失败"
+            except Exception as e:
+                log.info(f"小黑盒:出现了错误,错误信息{e}")
+        else:
+            log.info("小黑盒:没有配置小黑盒cookie")
