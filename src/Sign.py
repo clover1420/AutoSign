@@ -1,4 +1,3 @@
-from os import rename
 import requests
 import random
 import time
