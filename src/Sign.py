@@ -22,7 +22,7 @@ class gtfed():
     def Sign(self):
         if self.gtfed != "":
             zz = requests.post(url=self.url,data=self.gtfed,headers=self.head).json()
-            if zz['key'] == 'Ok':
+            if zz['key'] == 'ok':
                 if zz['csd_jdt'] == "100%":
                     log.info("好游快爆:爆米进度已满")
                     return "好游快爆:爆米进度已满"
