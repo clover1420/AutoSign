@@ -15,6 +15,8 @@
 
 <a href="https://www.xiaoheihe.cn/home">小黑盒</a> 的每日签到得盒币
 
+<a href="https://www.jiaoyimao.com/">交易猫</a> 的每日签到得积分
+
 # 使用
 1. 下载本项目
 
@@ -55,3 +57,7 @@
 ### 小黑盒
 
 1. 用手机进行抓包复制cookie的的数据填入小黑盒的cookie，imei请求连接里面获得 `注意imei可以不填，但有可能会封号`
+
+### 交易猫
+
+1. 用手机进行抓包复制cookie的的数据填入交易猫的cookie

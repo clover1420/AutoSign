@@ -43,6 +43,11 @@ SignToken = {
         "switch":True,
         "cookie":"",
         "imei":""
+    },
+    # 交易猫
+    "JiaoYiMao":{
+        "switch":True,
+        "cookie":""
     }
 
 }

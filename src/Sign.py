@@ -1,3 +1,4 @@
+from os import rename
 import requests
 import random
 import time
@@ -33,8 +34,8 @@ class gtfed():
                 log.info(f"好游快爆:{zz['info']}")
                 return f"好游快爆:{zz['info']}"
         else:
-            log.info("好游快爆:cookie为空")
-            return "好游快爆:cookie为空"
+            log.info("好游快爆:没有配置cookie")
+            return "好游快爆:没有配置cookie"
             
 #MIUI 历史版本签到
 class Miui():
@@ -155,4 +156,33 @@ class XiaoHeiHe():
             except Exception as e:
                 log.info(f"小黑盒:出现了错误,错误信息{e}")
         else:
-            log.info("小黑盒:没有配置小黑盒cookie")
+            log.info("小黑盒:没有配置cookie")
+            return "小黑盒:没有配置cookie"
+
+# 交易猫签到
+class JiaoYiMao():
+    def __init__(self,SignToken) -> None:
+        self.jiaoyimao = SignToken['JiaoYiMao']['cookie']
+        self.url = "https://m.jiaoyimao.com/api2/account/integration/getMyIntegration"
+
+    def Sgin(self):
+        if self.jiaoyimao != "":
+            head = {
+                "user-agent":"jym_mobile (Linux; U; Android12; zh_CN; M2012K11AC; Build/SKQ1.220213.001; fca7d8fc-03b5-4fea-97e6-94173844b374; 1080x2400) com.jym.mall/206/JYN_548/7.0.2 AliApp(JYM/7.0.2) UT4Aplus/0.2.29; density/2.7; app_id/23072786;  WindVane/8.5.0; utdid/YH2ygxDifiEDAA6wMV75K10e; umid_token/7+9LGztLOiq8MTWA+l8fZZQW+RjvBE56; oaid/9933af2363237087;",
+                "referer":"https://m.jiaoyimao.com/account/integration/center?spm=gcmall.home2022.topshortcut.0",
+                "x-csrf-token":"HT-x5YUi3IF7iyVDXY6FBc6g",
+                "x-requested-with":"com.jym.mall",
+                "cookie":self.jiaoyimao
+            }
+            zz = requests.get(url=self.url,headers=head).json()
+            if zz['stateCode'] == 200:
+                data = f"交易猫:签到成功 - 现有积分{zz['data']['amountLeft']}"
+                log.info(data)
+                return data
+            else:
+                data = f"交易猫:签到失败 - {zz}"
+                log.info(data)
+                return data
+        else:
+            log.info("交易猫:没有配置cookie")
+            return "交易猫:没有配置cookie"
