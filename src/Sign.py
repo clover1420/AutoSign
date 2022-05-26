@@ -163,6 +163,7 @@ class JiaoYiMao():
     def __init__(self,SignToken) -> None:
         self.jiaoyimao = SignToken['JiaoYiMao']['cookie']
         self.url = "https://m.jiaoyimao.com/api2/account/integration/getMyIntegration"
+        self.sginurl = "https://m.jiaoyimao.com/api2/account/integration/signin"
 
     def Sgin(self):
         if self.jiaoyimao != "":
@@ -173,13 +174,18 @@ class JiaoYiMao():
                 "x-requested-with":"com.jym.mall",
                 "cookie":self.jiaoyimao
             }
-            zz = requests.get(url=self.url,headers=head).json()
-            if zz['stateCode'] == 200:
-                data = f"交易猫:签到成功 - 现有积分{zz['data']['amountLeft']}"
+            zz = requests.get(url=self.sginurl,headers=head).json()
+            if zz['success']:
+                rep = requests.get(self.url,headers=head).json()
+                if rep['stateCode'] == 200:
+                    Integral = rep['data']['amountLeft']
+                else:
+                    Integral = "获取积分失败"
+                data = f"交易猫:签到成功 - 现有积分{Integral}"
                 log.info(data)
                 return data
             else:
-                data = f"交易猫:签到失败 - {zz}"
+                data = f"交易猫:签到失败 - {zz['extraErrMsg']}"
                 log.info(data)
                 return data
         else:

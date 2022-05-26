@@ -4,7 +4,7 @@ push = {
     # 支持qmsg酱 server酱 企业微信推送
     # qmsg,server,epwc
     # 为空或False则不进行推送
-    "PushMode":"qmsg",
+    "PushMode":"epwc",
     "PushKey":{
         # qmsg酱配置
         "Qmsg":"",
@@ -41,13 +41,11 @@ SignToken = {
     # 小黑盒签到
     "XiaoHeiHe":{
         "switch":True,
-        "cookie":"",
-        "imei":""
+        "cookie":""
     },
     # 交易猫
     "JiaoYiMao":{
         "switch":True,
         "cookie":""
     }
-
 }
