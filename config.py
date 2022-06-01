@@ -41,7 +41,8 @@ SignToken = {
     # 小黑盒签到
     "XiaoHeiHe":{
         "switch":True,
-        "cookie":""
+        "cookie":"",
+        "imei":""
     },
     # 交易猫
     "JiaoYiMao":{
