@@ -4,6 +4,9 @@ from main import run
 def main_handler(event,context):
     run()
 
+# -------  阿里云函数启动模块  -------- #
+def handler(event,context):
+    run()
 
 # -------  本地调试启动模块  --------#
 if __name__ == '__main__':

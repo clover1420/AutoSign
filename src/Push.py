@@ -52,24 +52,27 @@ class Push():
     # 企业微信推送
     def Epwc(self):
         try:
-            def GetToken():
-                url = f'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={self.EnterpriseId}&corpsecret={self.AppSecret}&debug=1'
-                response = requests.get(url=url).json()
-                return response['access_token']
-            url = f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={GetToken()}"
-            body = {
-                "touser" : self.UserUid,
-                "msgtype" : "text",
-                "agentid" : int(self.AppId),
-                "text" : {"content" : self.msg},
-                "safe":0,
-                "duplicate_check_interval": 1800
-            }
-            response = requests.post(url=url,json=body).json()
-            if response['errcode'] == 0:
-                log.info("企业微信推送成功")
+            if self.AppId != "" and self.AppSecret != "" and self.UserUid != "" and self.EnterpriseId != "":
+                def GetToken():
+                    url = f'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={self.EnterpriseId}&corpsecret={self.AppSecret}&debug=1'
+                    response = requests.get(url=url).json()
+                    return response['access_token']
+                url = f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={GetToken()}"
+                body = {
+                    "touser" : self.UserUid,
+                    "msgtype" : "text",
+                    "agentid" : int(self.AppId),
+                    "text" : {"content" : self.msg},
+                    "safe":0,
+                    "duplicate_check_interval": 1800
+                }
+                response = requests.post(url=url,json=body).json()
+                if response['errcode'] == 0:
+                    log.info("企业微信推送成功")
+                else:
+                    log.info("企业微信推送失败")
             else:
-                log.info("企业微信推送失败")
+                log.info("企业微信：配置没有填写完整")
         except Exception as e:
             log.info(f"企业微信推送时出现错误,错误码:{e}")
 
