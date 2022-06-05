@@ -35,7 +35,9 @@ SignToken = {
     #miui历史版本签到
     "MiUI":{
         "switch":True,
+        # 用户账号
         "user":"",
+        # 用户密码
         "password":""
     },
     # 小黑盒签到
@@ -48,5 +50,14 @@ SignToken = {
     "JiaoYiMao":{
         "switch":True,
         "cookie":""
+    },
+    # 天翼云盘 
+    # 填入账号密码
+    "tyyp":{
+        "switch":True,
+        # 账号
+        "username":"",
+        # 密码
+        "password":""
     }
 }

@@ -1,5 +1,5 @@
 # 介绍
-![](https://img.shields.io/badge/python-v3.10.4-blue) 
+![](https://img.shields.io/badge/python-v3.10.4-blue)   ![](https://img.shields.io/github/v/tag/clover1420/AutoSign?label=version) 
 
 自动签到各种应用脚本
 
@@ -16,6 +16,8 @@
 <a href="https://www.xiaoheihe.cn/home">小黑盒</a> 的每日签到得盒币
 
 <a href="https://www.jiaoyimao.com/">交易猫</a> 的每日签到得积分
+
+<a href="https://cloud.189.cn/web/login.html">天翼云盘</a> 的每日签到抽奖得空间
 
 # 使用
 1. 下载本项目
@@ -61,10 +63,6 @@
 7. 完成
 
 # cookie 获取
-
-### MIUI历史版本
-
-1. 只需要账号,密码，不需要cookie  
 
 ### 好游快爆
 
