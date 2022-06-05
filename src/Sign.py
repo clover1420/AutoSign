@@ -2,7 +2,7 @@ import requests
 import random
 import time
 import re
-import rsa
+from storehouse import rsa
 import base64
 from src.log import Log
 
