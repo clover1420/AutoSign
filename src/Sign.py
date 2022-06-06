@@ -294,6 +294,7 @@ class TYYP():
                     "Host": "m.cloud.189.cn",
                     "Accept-Encoding": "gzip, deflate",
                 }
+                # 签到
                 response = s.get(surl, headers=headers)
                 netdiskBonus = response.json()['netdiskBonus']
                 if response.json()['isSign'] == "false":
@@ -303,22 +304,31 @@ class TYYP():
                     log.info(f"天翼云盘:已经签到过了，获得：{netdiskBonus}M空间")
                     message =  f"天翼云盘:已经签到过了，获得：{netdiskBonus}M空间"
 
+                # 第一次抽奖
                 response = s.get(url, headers=headers).json()
-                if response['errorCode'] == "User_Not_Chance":
-                    log.info("天翼云盘:第一次抽奖-没有抽奖次数")
-                    message += "\n天翼云盘:第一次抽奖-没有抽奖次数"
-                else:
-                    log.info(f"天翼云盘:第一次抽奖获得{response['prizeName']}")
-                    message += f"\n天翼云盘:第一次抽奖获得{response['prizeName']}"
+                try:
+                    if "errorCode" in response:
+                        log.info("天翼云盘:第一次抽奖-没有抽奖次数")
+                        message += "\n天翼云盘:第一次抽奖-没有抽奖次数"
+                    else:
+                        log.info(f"天翼云盘:第一次抽奖获得{response['prizeName']}")
+                        message += f"\n天翼云盘:第一次抽奖获得{response['prizeName']}"
+                except Exception as er:
+                    log.info(f"天翼云盘:第一次抽奖出现了错误:{er}")
+                    message += f"\n天翼云盘:第一次抽奖出现了错误:{er}"
 
+                # 第二次抽奖
                 response = s.get(url2, headers=headers).json()
-                if response['errorCode'] == "User_Not_Chance":
-                    log.info("天翼云盘:第二次抽奖-没有抽奖次数")
-                    message += "\n天翼云盘:第二次抽奖-没有抽奖次数"
-                else:
-                    log.info(f"天翼云盘:第二次抽奖获得{response['prizeName']}")
-                    message += f"\n天翼云盘:第二次抽奖获得{response['prizeName']}"
-
+                try:
+                    if "errorCode" in response:
+                        log.info("天翼云盘:第二次抽奖-没有抽奖次数")
+                        message += "\n天翼云盘:第二次抽奖-没有抽奖次数"
+                    else:
+                        log.info(f"天翼云盘:第二次抽奖获得{response['prizeName']}")
+                        message += f"\n天翼云盘:第二次抽奖获得{response['prizeName']}"
+                except Exception as er:
+                    log.info(f"天翼云盘:第二次抽奖出现了错误:{er}")
+                    message += f"\n天翼云盘:第二次抽奖出现了错误:{er}"
                 return message
             else:
                 log.info("天翼云盘:账号或密码不能为空")
