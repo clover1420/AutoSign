@@ -1,5 +1,7 @@
 import requests
 from src.log import Log
+from dingtalkchatbot.chatbot import DingtalkChatbot, ActionCard, CardItem
+
 log = Log()
 
 class Push():
@@ -92,12 +94,11 @@ class Push():
                     # 方式一：通常初始化方式
                     xiaoding = DingtalkChatbot(webhook)
                 # Text消息@所有人
-                zz = xiaoding.send_text(msg=data, is_at_all=False)
-                printf zz
-                if zz['code'] == 0:
-                    log.info("钉钉机器人"+zz['reason'])
+                zz = xiaoding.send_text(msg=self.msg, is_at_all=False)
+                if zz['errcode'] == 0:
+                    log.info("钉钉机器人"+zz['errmsg'])
                 else:
-                    log.info("钉钉机器人"+zz['reason'])
+                    log.info("钉钉机器人"+zz['errmsg'])
             except Exception as e:
                 log.error("钉钉机器人可能挂了:"+e)
     def push(self):
