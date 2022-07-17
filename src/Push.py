@@ -1,5 +1,7 @@
 import requests
 from src.log import Log
+from dingtalkchatbot.chatbot import DingtalkChatbot, ActionCard, CardItem
+
 log = Log()
 
 class Push():
@@ -15,6 +17,8 @@ class Push():
         self.AppId = push['PushKey']['Epwc']['AppId']
         self.AppSecret = push['PushKey']['Epwc']['AppSecret']
         self.UserUid = push['PushKey']['Epwc']['UserUid']
+        self.token = push['PushKey']['Dingtalk']['token']
+        self.secret = push['PushKey']['Dingtalk']['secret']
         self.msg = msg
 
     #qmsg酱推送
@@ -75,7 +79,28 @@ class Push():
                 log.info("企业微信：配置没有填写完整")
         except Exception as e:
             log.info(f"企业微信推送时出现错误,错误码:{e}")
-
+    # Dingtalk推送
+    def Dingtalk(self) -> None:
+        if self.token == "":
+            log.info("没有配置Dingtalk的Token")
+        else:
+            try:
+                webhook = f'https://oapi.dingtalk.com/robot/send?access_token={self.token}'
+                data = {'msg': self.msg}
+                if self.secret == "":
+                    # 方式二：勾选“加签”选项时使用（v1.5以上新功能）
+                    xiaoding = DingtalkChatbot(webhook, secret=self.secret)
+                else:
+                    # 方式一：通常初始化方式
+                    xiaoding = DingtalkChatbot(webhook)
+                # Text消息@所有人
+                zz = xiaoding.send_text(msg=self.msg, is_at_all=False)
+                if zz['errcode'] == 0:
+                    log.info("钉钉机器人"+zz['errmsg'])
+                else:
+                    log.info("钉钉机器人"+zz['errmsg'])
+            except Exception as e:
+                log.error("钉钉机器人可能挂了:"+e)
     def push(self):
         if self.PushMode == "" or self.PushMode == "False":
             log.info("配置了不进行推送")
@@ -85,5 +110,8 @@ class Push():
             self.Server()
         elif self.PushMode == "epwc":
             self.Epwc()
+        elif self.PushMode == "dingtalk":
+            self.Dingtalk()
         else:
             log.info("推送配置错误")
+            
