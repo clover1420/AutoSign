@@ -87,3 +87,27 @@ class Push():
             self.Epwc()
         else:
             log.info("推送配置错误")
+            
+    # Dingtalk推送
+    def Dingtalk(self) -> None:
+        if self.token == "":
+            log.info("没有配置Dingtalk的Token")
+        else:
+            try:
+                webhook = f'https://oapi.dingtalk.com/robot/send?access_token={self.token}'
+                data = {'msg': self.msg}
+                if self.secret == "":
+                    # 方式二：勾选“加签”选项时使用（v1.5以上新功能）
+                    xiaoding = DingtalkChatbot(webhook, secret=self.secret)
+                else:
+                    # 方式一：通常初始化方式
+                    xiaoding = DingtalkChatbot(webhook)
+                # Text消息@所有人
+                zz = xiaoding.send_text(msg=data, is_at_all=False)
+                printf zz
+                if zz['code'] == 0:
+                    log.info("钉钉机器人"+zz['reason'])
+                else:
+                    log.info("钉钉机器人"+zz['reason'])
+            except Exception as e:
+                log.error("钉钉机器人可能挂了:"+e)
