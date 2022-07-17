@@ -153,8 +153,8 @@ class XiaoHeiHe():
                         log.info(f"小黑盒:{req['msg']}")
                         return f"小黑盒:{req['msg']}"
                 else:
-                    log.info("小黑盒:签到失败")
-                    return "小黑盒:签到失败"
+                    log.info(f"小黑盒:签到失败 - {req['msg']}")
+                    return f"小黑盒:签到失败 - {req['msg']}"
             except Exception as e:
                 log.info(f"小黑盒:出现了错误,错误信息{e}")
         else:
