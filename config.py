@@ -1,10 +1,10 @@
 # 推送配置
 push = {
     # 推送方式
-    # 支持qmsg酱 server酱 企业微信推送
-    # qmsg,server,epwc
+    # 支持qmsg酱 server酱 企业微信推送 钉钉机器人推送
+    # qmsg,server,epwc,dingtalk
     # 为空或False则不进行推送
-    "PushMode":"epwc",
+    "PushMode":"dingtalk",
     "PushKey":{
         # qmsg酱配置
         "Qmsg":"",
@@ -21,6 +21,13 @@ push = {
             "AppSecret":"",
             # 推送UID
             "UserUid":""
+        },
+        # 钉钉机器人推送(参考https://github.com/zhuifengshen/DingtalkChatbot)
+        "Dingtalk":{
+            # 机器人token
+            "token":"",
+            # 可选：创建机器人勾选“加签”选项时使用
+            "secret":""
         }
     }
 }
