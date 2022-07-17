@@ -2,6 +2,7 @@ from src.log import Log
 from src.Push import Push
 from config import push,SignToken
 from src.Sign import gtfed,Miui,XiaoHeiHe,JiaoYiMao,TYYP
+from dingtalkchatbot.chatbot import DingtalkChatbot, ActionCard, CardItem
 log = Log()
 
 def run():
