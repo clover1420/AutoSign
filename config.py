@@ -22,12 +22,18 @@ push = {
             # 推送UID
             "UserUid":""
         },
-        # 钉钉机器人推送(参考https://github.com/zhuifengshen/DingtalkChatbot)
+         # 钉钉机器人推送(参考https://github.com/zhuifengshen/DingtalkChatbot)
         "Dingtalk":{
             # 机器人token
             "token":"",
             # 可选：创建机器人勾选“加签”选项时使用
-            "secret":""
+            "secret":"",
+            # 被@人的用户userid。选填
+            "atuser":"",
+            # 被@人的手机号。选填
+            "atMobiles":"",
+            # 是否@所有人。
+            "isAtAll":False
         }
     }
 }

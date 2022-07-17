@@ -1,6 +1,10 @@
 import requests
+import time
+import hmac
+import hashlib
+import base64
+import urllib.parse
 from src.log import Log
-from dingtalkchatbot.chatbot import DingtalkChatbot, ActionCard, CardItem
 
 log = Log()
 
@@ -17,8 +21,11 @@ class Push():
         self.AppId = push['PushKey']['Epwc']['AppId']
         self.AppSecret = push['PushKey']['Epwc']['AppSecret']
         self.UserUid = push['PushKey']['Epwc']['UserUid']
-        self.token = push['PushKey']['Dingtalk']['token']
-        self.secret = push['PushKey']['Dingtalk']['secret']
+        self.Dingtalk_token = push['PushKey']['Dingtalk']['token']
+        self.Dingtalk_secret = push['PushKey']['Dingtalk']['secret']
+        self.Dingtalk_atuser = push['PushKey']['Dingtalk']['atuser']
+        self.Dingtalk_atMobiles = push['PushKey']['Dingtalk']['atMobiles']
+        self.Dingtalk_isAtAll = push['PushKey']['Dingtalk']['isAtAll']
         self.msg = msg
 
     #qmsg酱推送
@@ -79,28 +86,51 @@ class Push():
                 log.info("企业微信：配置没有填写完整")
         except Exception as e:
             log.info(f"企业微信推送时出现错误,错误码:{e}")
-    # Dingtalk推送
+
+    #钉钉机器人推送
     def Dingtalk(self) -> None:
-        if self.token == "":
-            log.info("没有配置Dingtalk的Token")
+        def webhook():
+            timestamp = str(round(time.time() * 1000))
+            secret = self.Dingtalk_secret
+            secret_enc = secret.encode('utf-8')
+            string_to_sign = '{}\n{}'.format(timestamp, secret)
+            string_to_sign_enc = string_to_sign.encode('utf-8')
+            hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+            sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
+            webhook = f'https://oapi.dingtalk.com/robot/send?access_token={self.Dingtalk_token}&timestamp={timestamp}&sign={sign}'
+            # 返回请求链接
+            return webhook
+
+        # 消息体构建
+        data = {
+            "at": {
+                "atMobiles":[self.Dingtalk_atMobiles],
+                "atUserIds":[self.Dingtalk_atuser],
+                "isAtAll": self.Dingtalk_isAtAll
+            },
+            "text": {
+                "content":self.msg
+                },
+            "msgtype":"text"
+        }
+        
+        if self.Dingtalk_token == "":
+            log.info("没有配置钉钉机器人的Token")
         else:
             try:
-                webhook = f'https://oapi.dingtalk.com/robot/send?access_token={self.token}'
-                data = {'msg': self.msg}
-                if self.secret == "":
-                    # 方式二：勾选“加签”选项时使用（v1.5以上新功能）
-                    xiaoding = DingtalkChatbot(webhook, secret=self.secret)
+                if self.Dingtalk_secret != "":
+                    url = webhook()
                 else:
-                    # 方式一：通常初始化方式
-                    xiaoding = DingtalkChatbot(webhook)
-                # Text消息@所有人
-                zz = xiaoding.send_text(msg=self.msg, is_at_all=False)
+                    url = f'https://oapi.dingtalk.com/robot/send?access_token={self.Dingtalk_token}'
+                # 发送消息
+                zz = requests.post(url=url,json=data).json()
                 if zz['errcode'] == 0:
-                    log.info("钉钉机器人"+zz['errmsg'])
+                    log.info("钉钉机器人推送成功")
                 else:
-                    log.info("钉钉机器人"+zz['errmsg'])
+                    log.info("钉钉机器人:"+zz['errmsg'])
             except Exception as e:
                 log.error("钉钉机器人可能挂了:"+e)
+         
     def push(self):
         if self.PushMode == "" or self.PushMode == "False":
             log.info("配置了不进行推送")
