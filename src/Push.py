@@ -15,6 +15,8 @@ class Push():
         self.AppId = push['PushKey']['Epwc']['AppId']
         self.AppSecret = push['PushKey']['Epwc']['AppSecret']
         self.UserUid = push['PushKey']['Epwc']['UserUid']
+        self.token = push['PushKey']['Dingtalk']['token']
+        self.secret = push['PushKey']['Dingtalk']['secret']
         self.msg = msg
 
     #qmsg酱推送
@@ -75,19 +77,6 @@ class Push():
                 log.info("企业微信：配置没有填写完整")
         except Exception as e:
             log.info(f"企业微信推送时出现错误,错误码:{e}")
-
-    def push(self):
-        if self.PushMode == "" or self.PushMode == "False":
-            log.info("配置了不进行推送")
-        elif self.PushMode == "qmsg":
-            self.Qmsg()
-        elif self.PushMode == "server":
-            self.Server()
-        elif self.PushMode == "epwc":
-            self.Epwc()
-        else:
-            log.info("推送配置错误")
-            
     # Dingtalk推送
     def Dingtalk(self) -> None:
         if self.token == "":
@@ -111,3 +100,17 @@ class Push():
                     log.info("钉钉机器人"+zz['reason'])
             except Exception as e:
                 log.error("钉钉机器人可能挂了:"+e)
+    def push(self):
+        if self.PushMode == "" or self.PushMode == "False":
+            log.info("配置了不进行推送")
+        elif self.PushMode == "qmsg":
+            self.Qmsg()
+        elif self.PushMode == "server":
+            self.Server()
+        elif self.PushMode == "epwc":
+            self.Epwc()
+        elif self.PushMode == "dingtalk":
+            self.Dingtalk()
+        else:
+            log.info("推送配置错误")
+            
