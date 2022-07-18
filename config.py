@@ -22,7 +22,8 @@ push = {
             # 推送UID
             "UserUid":""
         },
-         # 钉钉机器人推送(参考https://github.com/zhuifengshen/DingtalkChatbot)
+         # 钉钉机器人token获取 https://open.dingtalk.com/document/robots/custom-robot-access
+         # 复制access_token=后面的token
         "Dingtalk":{
             # 机器人token
             "token":"",
