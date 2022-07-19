@@ -1,25 +1,74 @@
-# 介绍
-![](https://img.shields.io/badge/python-v3.10.4-blue)   ![](https://img.shields.io/github/v/tag/clover1420/AutoSign?label=version) 
+<p align="center">
+    <img src="https://www.clover1420.top/img/aa.jpg" width="auto" height="200">
+</p>
+<h1 align="center">自动签到</h1>
+<p align="center">
+    <img src="https://img.shields.io/badge/python-v3.10.4-blue" alt="python"/>
+    <img src="https://img.shields.io/github/v/tag/clover1420/AutoSign?label=version" alt="version"/>
+</p>
+<p align="center">
+    <a href="https://github.com/clover1420/AutoSign">
+        <img src="https://img.shields.io/twitter/url?label=github&logo=github&style=social&url=https%3A%2F%2Fgithub.com%2Fclover1420%2FAutoSign" alt="GitHub"/>
+    </a>
+    <a href="https://gitee.com/clover1314/AutoSign">
+        <img src="https://img.shields.io/twitter/url?label=gitee&logo=gitee&style=social&url=https%3A%2F%2Fgitee.com%2Fclover1314%2Fauto-sign" alt="GitHub"/>
+    </a>
+</p>
+本项目用于需要手动每天签到的场景，使用本项目解放双手。本项目自动每天签到并推送到各社交应用上，目前支持qmsg，酷Q，企业微信，钉钉
 
-自动签到各种应用脚本
+<hr style="height: 1px;">
+<h2 align="center">目前支持</h2>
+<table align="center" border="1">
+  <tr>
+    <th>应用</th>
+    <th>是否需要cookie</th>
+    <th>是否需要密码</th>
+    <th>是否可用</th>
+    <th>功能</th>
+  </tr>
+  <tr>
+    <td><a href="https://miuiver.com/">MIUI历史版本</a></td>
+    <td>❌</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td>每日签到得积分</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.3839.com/">好游快报</a></td>
+    <td>✅</td>
+    <td>❌</td>
+    <td>✅</td>
+    <td>每日爆米花浇水</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.xiaoheihe.cn/home">小黑盒</a></td>
+    <td>✅</td>
+    <td>❌</td>
+    <td>✅</td>
+    <td>每日签到得盒币</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.jiaoyimao.com/">交易猫</a></td>
+    <td>✅</td>
+    <td>❌</td>
+    <td>✅</td>
+    <td>每日签到得积分</td>
+  </tr>
+  <tr>
+    <td><a href="https://cloud.189.cn/web/login.html">天翼云盘</a></td>
+    <td>❌</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td>每日签到抽奖得空间</td>
+  </tr>
+</table>
 
-[github仓库](https://github.com/clover1420/AutoSign)
+<br>
 
-[gitee仓库](https://gitee.com/clover1314/auto-sign)
+---
 
-### 目前支持：
+**使用**：
 
-<a href="https://miuiver.com/">MIUI历史版本</a> 的每日签到得积分
-
-<a href="https://www.3839.com/">好游快报</a> 的每日爆米花浇水
-
-<a href="https://www.xiaoheihe.cn/home">小黑盒</a> 的每日签到得盒币
-
-<a href="https://www.jiaoyimao.com/">交易猫</a> 的每日签到得积分
-
-<a href="https://cloud.189.cn/web/login.html">天翼云盘</a> 的每日签到抽奖得空间
-
-# 使用
 1. 下载本项目
 
 2. 解压本项目压缩包,在解压目录中**Shift+右键** 打开你的命令提示符cmd或powershell
@@ -29,6 +78,8 @@
 4. 打开目录中的**config.py**文件，填写cookie。
 
 5. 运行**index.py**文件。
+
+<br>
 
 # 使用腾讯云函数运行
 
@@ -75,3 +126,15 @@
 ### 交易猫
 
 1. 用手机进行抓包复制cookie的的数据填入交易猫的cookie
+
+<style>
+    th{
+        text-align:center
+    }
+    table{
+        text-align:center
+    }
+    a{
+        text-decoration:none
+    }
+</style>
