@@ -14,7 +14,7 @@
         <img src="https://img.shields.io/twitter/url?label=gitee&logo=gitee&style=social&url=https%3A%2F%2Fgitee.com%2Fclover1314%2Fauto-sign" alt="GitHub"/>
     </a>
 </p>
-本项目用于需要手动每天签到的场景，使用本项目解放双手。本项目自动每天签到并推送到各社交应用上，目前支持qmsg，酷Q，企业微信，钉钉
+本项目用于需要手动每天签到的场景，使用本项目解放双手。本项目自动每天签到并推送到各社交应用上，目前支持qmsg，sever酱，企业微信，钉钉
 
 <hr style="height: 1px;">
 <h2 align="center">目前支持</h2>
