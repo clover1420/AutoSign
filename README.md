@@ -7,10 +7,10 @@
     <img src="https://img.shields.io/github/v/tag/clover1420/AutoSign?label=version" alt="version"/>
 </p>
 <p align="center">
-    <a href="https://github.com/clover1420/AutoSign">
+    <a href="https://github.com/clover1420/AutoSign" style="text-decoration:none">
         <img src="https://img.shields.io/twitter/url?label=github&logo=github&style=social&url=https%3A%2F%2Fgithub.com%2Fclover1420%2FAutoSign" alt="GitHub"/>
     </a>
-    <a href="https://gitee.com/clover1314/AutoSign">
+    <a href="https://gitee.com/clover1314/AutoSign" style="text-decoration:none">
         <img src="https://img.shields.io/twitter/url?label=gitee&logo=gitee&style=social&url=https%3A%2F%2Fgitee.com%2Fclover1314%2Fauto-sign" alt="GitHub"/>
     </a>
 </p>
@@ -18,13 +18,13 @@
 
 <hr style="height: 1px;">
 <h2 align="center">目前支持</h2>
-<table align="center" border="1">
+<table align="center" border="1" style="text-align:center">
   <tr>
-    <th>应用</th>
-    <th>是否需要cookie</th>
-    <th>是否需要密码</th>
-    <th>是否可用</th>
-    <th>功能</th>
+    <th style="text-align:center">应用</th>
+    <th style="text-align:center">是否需要cookie</th>
+    <th style="text-align:center">是否需要密码</th>
+    <th style="text-align:center">是否可用</th>
+    <th style="text-align:center">功能</th>
   </tr>
   <tr>
     <td><a href="https://miuiver.com/">MIUI历史版本</a></td>
@@ -126,15 +126,3 @@
 ### 交易猫
 
 1. 用手机进行抓包复制cookie的的数据填入交易猫的cookie
-
-<style>
-    th{
-        text-align:center
-    }
-    table{
-        text-align:center
-    }
-    a{
-        text-decoration:none
-    }
-</style>
