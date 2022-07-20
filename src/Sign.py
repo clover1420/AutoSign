@@ -194,6 +194,7 @@ class JiaoYiMao():
         else:
             log.info("交易猫:没有配置cookie")
             return "交易猫:没有配置cookie"
+
 # 天翼云盘
 # 使用了开源项目https://github.com/xtyuns/cloud189app-action
 class TYYP():
@@ -336,3 +337,36 @@ class TYYP():
         except Exception as er:
             log.info(f"天翼云盘:出现了错误:{er}")
             return f"天翼云盘:出现了错误:{er}"
+
+
+# 网易云游戏签到
+class wyyyx():
+    def __init__(self,SignToken) -> None:
+        self.wyyyx_cookie = SignToken['wyyyx']['cookie']
+
+    def Sgin(self):
+        url='https://n.cg.163.com/api/v2/sign-today'
+        header={
+            'Accept': 'application/json, text/plain, */*',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,ja-JP;q=0.6,ja;q=0.5',
+            'Authorization': self.wyyyx_cookie,
+            'Connection': 'keep-alive',
+            'Content-Length': '0',
+            'Host': 'n.cg.163.com',
+            'Origin': 'https://cg.163.com',
+            'Referer': 'https://cg.163.com/',
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-site',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36',
+            'X-Platform': '0'
+        }
+        res = requests.post(url=url,headers=header).status_code
+        if res == 200:
+            log.info("网易云游戏:签到成功")
+            return "网易云游戏:签到成功"
+        else:
+            log.info("网易云游戏:签到失败")
+            return "网易云游戏:签到失败"
+        

@@ -5,6 +5,7 @@ push = {
     # qmsg,server,epwc,dingtalk
     # 为空或False则不进行推送
     "PushMode":"dingtalk",
+    # 推送配置
     "PushKey":{
         # qmsg酱配置
         "Qmsg":"",
@@ -73,5 +74,10 @@ SignToken = {
         "username":"",
         # 密码
         "password":""
+    },
+    # 网易云游戏
+    "wyyyx":{
+        "switch":False,
+        "cookie":""
     }
 }

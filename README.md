@@ -61,6 +61,13 @@
     <td>✅</td>
     <td>每日签到抽奖得空间</td>
   </tr>
+  <tr>
+    <td><a href="https://cg.163.com/#/mobile">网易云游戏</a></td>
+    <td>✅</td>
+    <td>❌</td>
+    <td>❓</td>
+    <td>每日签到获取使用时间和成长值</td>
+  </tr>
 </table>
 
 <br>
@@ -126,3 +133,11 @@
 ### 交易猫
 
 1. 用手机进行抓包复制cookie的的数据填入交易猫的cookie
+
+### 网易云游戏
+
+1. 首先我们进入[官网](https://cg.163.com/#/mobile)，进行登录。
+
+2. 然后用F12打开开发者工具后使用Ctrl+F5进行刷新。
+
+3. 找到@me这一项，然后在右边找到Authorization将冒号后面的内容复制下来就是我们所需要的Cookie。
