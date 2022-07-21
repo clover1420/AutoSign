@@ -65,7 +65,7 @@
     <td><a href="https://cg.163.com/#/mobile">网易云游戏</a></td>
     <td>✅</td>
     <td>❌</td>
-    <td>❓</td>
+    <td>✅</td>
     <td>每日签到获取使用时间和成长值</td>
   </tr>
 </table>

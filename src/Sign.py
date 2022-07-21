@@ -367,6 +367,6 @@ class wyyyx():
             log.info("网易云游戏:签到成功")
             return "网易云游戏:签到成功"
         else:
-            log.info("网易云游戏:签到失败")
-            return "网易云游戏:签到失败"
+            log.info("网易云游戏:签到失败或已签到")
+            return "网易云游戏:签到失败或已签到"
         
