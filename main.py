@@ -1,3 +1,4 @@
+import time
 from src.log import Log
 from src.Push import Push
 from config import push,SignToken
@@ -5,6 +6,9 @@ from src.Sign import gtfed,Miui,XiaoHeiHe,JiaoYiMao,TYYP,wyyyx
 log = Log()
 
 def run():
+    # 开始时间
+    Begin = time.time()
+    # 程序主体
     data = "今日签到结果:"
     if SignToken['MiUI']['switch']:
         body = Miui(SignToken)
@@ -24,7 +28,10 @@ def run():
     if SignToken['wyyyx']['switch']:
         body = wyyyx(SignToken)
         data = data+"\n"+body.Sgin()
+    # 结束时间
+    end = time.time()
+    sum = round(end-Begin,3)
+    data = data + f"\n本次运行时间{sum}秒"
     ts = Push(data,push)
     ts.push()
     log.info("\n"+data)
-    
