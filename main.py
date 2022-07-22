@@ -30,8 +30,11 @@ def run():
         data = data+"\n"+body.Sgin()
     # 结束时间
     end = time.time()
-    sum = round(end-Begin,3)
-    data = data + f"\n本次运行时间{sum}秒"
+    sum = f"本次运行时间{round(end-Begin,3)}秒"
+    data = data + "\n" + sum
+    # 推送消息
     ts = Push(data,push)
     ts.push()
+
+    log.info(sum)
     log.info("\n"+data)
