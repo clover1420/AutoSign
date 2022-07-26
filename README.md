@@ -128,7 +128,7 @@
 
 ### 小黑盒
 
-1. 用手机进行抓包复制cookie的的数据填入小黑盒的cookie，heybox_id。heybox_id在请求链接里面获取，imei请求连接里面获得 `注意imei可以不填，但有可能会封号`
+1. 用手机进行抓包复制cookie的的数据填入小黑盒的cookie heybox_id，heybox_id可以在请求链接获取，imei请求连接里面获得 `注意imei可以不填，但有可能会封号`
 
 ### 交易猫
 
