@@ -55,11 +55,12 @@ SignToken = {
         # 用户密码
         "password":""
     },
-    # 小黑盒签到
+    # 小黑盒签到 heybox_id 必填
     "XiaoHeiHe":{
         "switch":True,
         "cookie":"",
-        "imei":""
+        "imei":"",
+        "heybox_id":""
     },
     # 交易猫
     "JiaoYiMao":{

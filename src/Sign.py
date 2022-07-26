@@ -98,6 +98,7 @@ class XiaoHeiHe():
     def __init__(self,SignToken) -> None:
         self.Xiaoheihe = SignToken['XiaoHeiHe']['cookie']
         self.imei = SignToken['XiaoHeiHe']['imei']
+        self.heybox_id = SignToken['XiaoHeiHe']['heybox_id']
         self.n = self.get_nonce_str()
         self.t = int(time.time())
         self.u = "/task/sign"
@@ -131,8 +132,8 @@ class XiaoHeiHe():
                     "hkey":self.hkey(),
                     "nonce":self.n,
                     "imei":self.imei,
-                    "heybox_id":"15083711",
-                    "version":"1.3.221",
+                    "heybox_id":self.heybox_id,
+                    "version":"1.3.229",
                     "divice_info":"M2012K11AC",
                     "x_app":"heybox",
                     "channel":"heybox_xiaomi",
