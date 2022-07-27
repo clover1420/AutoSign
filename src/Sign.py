@@ -98,7 +98,7 @@ class XiaoHeiHe():
     def __init__(self,SignToken) -> None:
         self.Xiaoheihe = SignToken['XiaoHeiHe']['cookie']
         self.imei = SignToken['XiaoHeiHe']['imei']
-        self.heybox_id = SignToken['XiaoHeiHe']['"heybox_id']
+        self.heybox_id = SignToken['XiaoHeiHe']['heybox_id']
         self.n = self.get_nonce_str()
         self.t = int(time.time())
         self.u = "/task/sign"
