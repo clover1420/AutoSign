@@ -26,6 +26,7 @@ class gtfed():
     def Sign(self):
         if self.gtfed != "":
             zz = requests.post(url=self.Url,data=self.gtfed,headers=self.head).json()
+            print(zz)
             if zz['key'] == 'ok':
                 if zz['csd_jdt'] == "100%":
                     cookie = self.gtfed.replace("Watering","PlantRipe")
@@ -40,11 +41,35 @@ class gtfed():
                             log.info("好游快爆:收获完成，重新播种失败")
                             return "好游快爆:收获完成，重新播种失败"
                     else:
-                        log.info("好游快爆:收获失败，请手动收获")
-                        return "好游快爆:收获失败，请手动收获"
+                        log.info("好游快爆:收获，重新播种完成")
+                        return "好游快爆:收获，重新播种完成"
                 else:
-                    log.info("好游快爆:爆米进度已满")
-                    return "好游快爆:爆米进度已满"
+                    log.info("好游快爆:浇水完成")
+                    return "好游快爆:浇水完成"
+            elif  zz['key'] == '502':
+                cookie = self.gtfed.replace("Watering","PlantRipe")
+                SowRes = requests.post(url=self.Url,data=cookie,headers=self.head).json()
+                if SowRes['key'] == 513:
+                    cookie = self.gtfed.replace("Watering","PlantSow")
+                    SowRes = requests.post(url=self.Url,data=cookie,headers=self.head).json()
+                    if SowRes['key'] == "ok":
+                        log.info("好游快爆:收获，重新播种完成")
+                        return "好游快爆:收获，重新播种完成"
+                    else:
+                        log.info("好游快爆:收获，重新播种完成")
+                        return "好游快爆:收获，重新播种完成"
+                else:
+                    log.info("好游快爆:收获失败，请手动收获")
+                    return "好游快爆:收获失败，请手动收获"
+            elif zz['key'] == '501':
+                cookie = self.gtfed.replace("Watering","PlantSow")
+                SowRes = requests.post(url=self.Url,data=cookie,headers=self.head).json()
+                if SowRes['key'] == "ok":
+                    log.info("好游快爆:收获，重新播种完成")
+                    return "好游快爆:收获，重新播种完成"
+                else:
+                    log.info("好游快爆:收获完成，重新播种失败")
+                    return "好游快爆:收获完成，重新播种失败"
             else:
                 log.info(f"好游快爆:{zz['info']}")
                 return f"好游快爆:{zz['info']}"
