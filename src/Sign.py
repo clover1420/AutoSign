@@ -216,20 +216,24 @@ class JiaoYiMao():
                 "x-requested-with":"com.jym.mall",
                 "cookie":self.jiaoyimao
             }
-            zz = requests.get(url=self.sginurl,headers=head).json()
-            if zz['success']:
-                rep = requests.get(self.url,headers=head).json()
-                if rep['stateCode'] == 200:
-                    Integral = rep['data']['amountLeft']
+            try:
+                zz = requests.get(url=self.sginurl,headers=head).json()
+                if zz['success']:
+                    rep = requests.get(self.url,headers=head).json()
+                    if rep['stateCode'] == 200:
+                        Integral = rep['data']['amountLeft']
+                    else:
+                        Integral = "获取积分失败"
+                    data = f"交易猫:签到成功 - 现有积分{Integral}"
+                    log.info(data)
+                    return data
                 else:
-                    Integral = "获取积分失败"
-                data = f"交易猫:签到成功 - 现有积分{Integral}"
-                log.info(data)
-                return data
-            else:
-                data = f"交易猫:签到失败 - {zz['extraErrMsg']}"
-                log.info(data)
-                return data
+                    data = f"交易猫:签到失败 - 已经签到了"
+                    log.info(data)
+                    return data
+            except Exception as e:
+                log.info("交易猫:cookie可能已过期，或出现了错误")
+                return "交易猫:cookie可能已过期，或出现了错误"
         else:
             log.info("交易猫:没有配置cookie")
             return "交易猫:没有配置cookie"
