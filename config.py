@@ -23,8 +23,7 @@ push = {
             # 推送UID
             "UserUid":""
         },
-         # 钉钉机器人token获取 https://open.dingtalk.com/document/robots/custom-robot-access
-         # 复制access_token=后面的token
+         # 钉钉机器人推送(参考https://github.com/zhuifengshen/DingtalkChatbot)
         "Dingtalk":{
             # 机器人token
             "token":"",
@@ -55,7 +54,7 @@ SignToken = {
         # 用户密码
         "password":""
     },
-    # 小黑盒签到 heybox_id 必填
+    # 小黑盒签到
     "XiaoHeiHe":{
         "switch":True,
         "cookie":"",
@@ -78,7 +77,7 @@ SignToken = {
     },
     # 网易云游戏
     "wyyyx":{
-        "switch":False,
+        "switch":True,
         "cookie":""
     }
 }
