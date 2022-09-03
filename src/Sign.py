@@ -233,7 +233,7 @@ class XiaoHeiHe():
                         return fx+"\n已经签到过了"
                     else:
                         log.info(f"小黑盒:{req['msg']}")
-                        return req['msg']
+                        return {fx} + "\n" + req['msg']
                 else:
                     log.info(f"小黑盒:签到失败 - {req['msg']}")
                     return f"{fx}\n签到失败 - {req['msg']}"   
