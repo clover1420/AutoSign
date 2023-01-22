@@ -16,3 +16,7 @@ JiaoYiMao_Referer = JiaoYiMao_Api + "/account/integration/center?spm=gcmall.home
 Miui_Api = "https://miuiver.com"
 Miui_LoginUrl = Miui_Api + "/wp-content/plugins/erphplogin//action/login.php"
 Miui_SginUrl = Miui_Api + "/wp-admin/admin-ajax.php"
+
+# 好游快爆链接配置
+hykb_host = "https://huodong3.3839.com"
+hykb_sgin = hykb_host + "/n/hykb/grow/ajax.php"

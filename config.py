@@ -42,7 +42,7 @@ push = {
 #签到token
 SignToken = {
     #好游快报 token
-    "gtfed":{
+    "hykb":{
         "switch":True,
         "cookie":""
     },
