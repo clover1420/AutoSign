@@ -1,7 +1,7 @@
 import time
 from src.log import Log
 from src.Push import Push
-from config import push,SignToken
+from steat import push,SignToken
 from src.hykb import HaoYouKuaiBao
 from src.Sign import Miui,XiaoHeiHe,JiaoYiMao,TYYP,wyyyx
 log = Log()

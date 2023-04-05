@@ -67,6 +67,7 @@ class XiaoHeiHe():
         self.Xiaoheihe = SignToken['XiaoHeiHe']['cookie']
         self.imei = SignToken['XiaoHeiHe']['imei']
         self.heybox_id = SignToken['XiaoHeiHe']['heybox_id']
+        self.version = SignToken['XiaoHeiHe']['version']
         self.n = self.get_nonce_str()
         self.t = int(time.time())
         #self.u = "/task/sign"
@@ -95,11 +96,11 @@ class XiaoHeiHe():
             "nonce":self.n,
             "imei":self.imei,
             "heybox_id":self.heybox_id,
-            "version":"1.3.229",
+            "version":self.version,
             "divice_info":"M2012K11AC",
             "x_app":"heybox",
             "channel":"heybox_xiaomi",
-            "os_version":"12",
+            "os_version":"13",
             "os_type":"Android"
         }
         return p

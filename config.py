@@ -59,7 +59,8 @@ SignToken = {
         "switch":True,
         "cookie":"",
         "imei":"",
-        "heybox_id":""
+        "heybox_id":"",
+        "version": "1.3.229"
     },
     # 交易猫
     "JiaoYiMao":{

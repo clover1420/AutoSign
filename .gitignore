@@ -1,1 +1,5 @@
 steat.py
+*/*__pycache__
+/__pycache__
+/pyasn1/*/__pycache__
+/pyasn1/codec/*/__pycache__
