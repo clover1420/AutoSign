@@ -36,7 +36,7 @@ push = {
             # 是否@所有人。
             "isAtAll":False
         },
-        #企业微信hook推送
+        #企业微信hook推送 url获取https://zhuanlan.zhihu.com/p/370006823
         "wxhook":{
             "url":""
         }
