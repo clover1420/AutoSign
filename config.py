@@ -2,9 +2,9 @@
 push = {
     # 推送方式
     # 支持qmsg酱 server酱 企业微信推送 钉钉机器人推送
-    # qmsg,server,epwc,dingtalk
+    # qmsg,server,epwc,dingtalk,wxhook
     # 为空或False则不进行推送
-    "PushMode":"dingtalk",
+    "PushMode":"wxhook",
     # 推送配置
     "PushKey":{
         # qmsg酱配置
@@ -35,6 +35,10 @@ push = {
             "atMobiles":"",
             # 是否@所有人。
             "isAtAll":False
+        },
+        #企业微信hook推送
+        "wxhook":{
+            "url":""
         }
     }
 }

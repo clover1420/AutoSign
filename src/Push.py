@@ -26,6 +26,7 @@ class Push():
         self.Dingtalk_atuser = push['PushKey']['Dingtalk']['atuser']
         self.Dingtalk_atMobiles = push['PushKey']['Dingtalk']['atMobiles']
         self.Dingtalk_isAtAll = push['PushKey']['Dingtalk']['isAtAll']
+        self.wxhookurl = push['PushKey']['wxhook']['url']
         self.msg = msg
 
     #qmsg酱推送
@@ -130,7 +131,33 @@ class Push():
                     log.info("钉钉机器人:"+zz['errmsg'])
             except Exception as e:
                 log.error("钉钉机器人可能挂了:"+e)
-         
+
+    # 企业微信webhook推送
+    def wxwebhook(self):
+        head = {
+            "Content-Type": "application/json"
+        }
+        data = {
+            "msgtype": "text",
+            "text": {
+                "content": self.msg
+            }
+        }
+        if self.wxhookurl != "":
+            try:
+                zz = requests.post(url=self.wxhookurl,headers=head,json=data).json()
+                if zz['errcode'] == 0:
+                    log.info("企业微信hook推送成功")
+                else:
+                    log.info(f"企业微信hook推送失败:{zz}")
+            except Exception as e:
+                log.error(f"企业微信hook推送出现错误:{e}")
+        else:
+            log.info("企业微信hook推送的url为空。")
+
+        
+
+        
     def push(self):
         if self.PushMode == "" or self.PushMode == "False":
             log.info("配置了不进行推送")
@@ -142,6 +169,8 @@ class Push():
             self.Epwc()
         elif self.PushMode == "dingtalk":
             self.Dingtalk()
+        elif self.PushMode == "wxhook":
+            self.wxwebhook()
         else:
             log.info("推送配置错误")
             
