@@ -1,6 +1,7 @@
 import time, yaml
 from src.log import Log
 from src.Push import Push
+from src.SkyWingsCloud import Cloud
 from src.hykb import HaoYouKuaiBao
 from src.Sign import Miui,XiaoHeiHe,JiaoYiMao,TYYP,wyyyx
 log = Log()
@@ -29,9 +30,11 @@ def run():
     if SignToken['JiaoYiMao']['switch']:
         body = JiaoYiMao(SignToken)
         data += "\n\n交易猫:\n"+body.Sgin()
+        
+    # 天翼云盘签到
     if SignToken['tyyp']['switch']:
-        body = TYYP(SignToken)
-        data += "\n\n天翼云盘:\n"+body.Sgin()
+        body = Cloud(SignToken['tyyp'])
+        data += "\n\n天翼云盘:\n"+body.sgin()
     if SignToken['wyyyx']['switch']:
         body = wyyyx(SignToken)
         data += "\n\n网易云游戏:\n"+body.Sgin()
