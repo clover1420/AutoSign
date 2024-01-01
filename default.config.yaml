@@ -5,7 +5,7 @@ Push:
   # 为空或False则不进行推送
   PushMode: Qmsg
   Qmsg:
-    key: "8f5ee9dc8f176a9b99aa0c941d37405e"
+    key: ""
   Server:
     key: "your server key"
   Epwc:
