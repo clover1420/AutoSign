@@ -82,7 +82,7 @@
 
 3. 执行 `pip install -r requirements.txt` 安装模块
 
-4. 打开目录中的**config.py**文件，填写cookie。
+4. 把目录中的**default.config.yaml**文件重命名为**config.yaml**，并填写cookie。
 
 5. 运行**index.py**文件。
 

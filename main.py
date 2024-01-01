@@ -19,7 +19,7 @@ def run():
     config = getconfig()
     SignToken = config['SignToken']
     data = "今日签到结果:\n\n"
-
+    # miui历史版本签到
     if SignToken['MiUI']['switch']:
         body = Miui(SignToken['MiUI'])
         data += "MIUI历史版本:\n"+body.Sign()
