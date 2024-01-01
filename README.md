@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://www.clover1420.top/img/aa.jpg" width="auto" height="200">
+    <img src="https://www.fhrf.top/img/aa.jpg" width="auto" height="200">
 </p>
 <h1 align="center">自动签到</h1>
 <p align="center">
