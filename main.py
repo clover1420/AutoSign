@@ -1,9 +1,10 @@
 import time, yaml
 from src.log import Log
 from src.Push import Push
+from src.Miui import Miui
 from src.SkyWingsCloud import Cloud
 from src.hykb import HaoYouKuaiBao
-from src.Sign import Miui,XiaoHeiHe,JiaoYiMao,TYYP,wyyyx
+from src.Sign import XiaoHeiHe,JiaoYiMao,wyyyx
 log = Log()
 
 def getconfig():
@@ -18,8 +19,9 @@ def run():
     config = getconfig()
     SignToken = config['SignToken']
     data = "今日签到结果:\n\n"
+
     if SignToken['MiUI']['switch']:
-        body = Miui(SignToken)
+        body = Miui(SignToken['MiUI'])
         data += "MIUI历史版本:\n"+body.Sign()
     if SignToken['Hykb']['switch']:
         body = HaoYouKuaiBao(SignToken)
@@ -30,7 +32,7 @@ def run():
     if SignToken['JiaoYiMao']['switch']:
         body = JiaoYiMao(SignToken)
         data += "\n\n交易猫:\n"+body.Sgin()
-        
+
     # 天翼云盘签到
     if SignToken['tyyp']['switch']:
         body = Cloud(SignToken['tyyp'])

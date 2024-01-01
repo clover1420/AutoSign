@@ -1,65 +1,11 @@
 import requests
 import random
 import time
-import re
-import rsa
 import base64
 import src.setting as url
 from src.log import Log
 
 log = Log()
-
-#MIUI 历史版本签到
-class Miui():
-    """MIUI 历史版本签到
-    """
-    def __init__(self,SignToken) -> None:
-        self.switch = SignToken['MiUI']['switch']
-        self.user = SignToken['MiUI']['user']
-        self.password = SignToken['MiUI']['password']
-        self.head = {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'Accept': 'application/json, text/javascript, */*; q=0.01'
-        }
-    #登录
-    def Login(self):
-        datas = {
-            'log':self.user,
-            'pwd':self.password,
-            'action': 'mobantu_login'
-        }
-        response = requests.post(url=url.Miui_LoginUrl,data=datas,headers=self.head)
-        if response.text == '1':
-            log.info("MIUI历史版本:登录成功")
-            if response.text.__eq__(1):
-                cookies = response.cookies
-                log.info("MIUI历史版本:cookies获取成功")
-            else:
-                cookies = "没有获取到cookie"
-                log.info("MIUI历史版本:没有获取到cookie")
-            return cookies
-        else:
-            log.info("MIUI历史版本:登录失败,账号或密码错误")
-    #签到
-    def Sign(self):
-        datas = {
-            'action': 'epd_checkin'
-        }
-        if self.user != "" and self.password != "":
-            cookies = self.Login()
-            if cookies == None:
-                pass
-            else:
-                response = requests.post(url=url.Miui_SginUrl,data=datas,headers=self.head,cookies=cookies).json()
-                if response['status'] == 200:
-                    log.info("MIUI历史版本:签到成功积分+1")
-                    return "签到成功积分+1"
-                else:
-                    log.info("MIUI历史版本:" + response["msg"])
-                    return response["msg"]
-        else:
-            log.info("MIUI历史版本:账号或密码为空")
-            return "账号或密码为空"
 
 # 小黑盒签到
 class XiaoHeiHe():
