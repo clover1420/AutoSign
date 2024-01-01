@@ -1,0 +1,48 @@
+Push:
+  # 推送方式
+  # 支持qmsg酱 server酱 企业微信推送 钉钉机器人推送
+  # Qmsg,Server,Epwc,Dingtalk,Wxhook
+  # 为空或False则不进行推送
+  PushMode: Qmsg
+  Qmsg:
+    key: "8f5ee9dc8f176a9b99aa0c941d37405e"
+  Server:
+    key: "your server key"
+  Epwc:
+    EnterpriseId: ""
+    AppId: ""
+    AppSecret: ""
+    UserUid: ""
+  Dingtalk:
+    token:
+    secret:
+    atuser:
+    atMobiles: 
+    isAtAll: False
+  Wxhook:
+    url: ""
+
+SignToken:
+  Hykb:
+    switch: False
+    cookie:
+  MiUI:
+    switch: False
+    user:
+    password:
+  XiaoHeiHe:
+    switch: False
+    cookie:
+    imei:
+    heybox_id:
+    version:
+  JiaoYiMao:
+    switch: False
+    cookie:
+  Tyyp:
+    switch: False
+    username:
+    password:
+  wyyyx:
+    switch: False
+    cookie: 

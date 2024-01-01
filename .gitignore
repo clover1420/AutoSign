@@ -3,3 +3,4 @@ steat.py
 /__pycache__
 /pyasn1/*/__pycache__
 /pyasn1/codec/*/__pycache__
+config.yaml

@@ -1,20 +1,26 @@
-import time
+import time, yaml
 from src.log import Log
 from src.Push import Push
-from config import push,SignToken
 from src.hykb import HaoYouKuaiBao
 from src.Sign import Miui,XiaoHeiHe,JiaoYiMao,TYYP,wyyyx
 log = Log()
+
+def getconfig():
+    with open('config.yaml', 'r', encoding='utf-8') as f:
+        config = yaml.load(f, Loader=yaml.FullLoader)
+    return config
 
 def run():
     #开始时间
     Begin = time.time()
     #程序主体
+    config = getconfig()
+    SignToken = config['SignToken']
     data = "今日签到结果:\n\n"
     if SignToken['MiUI']['switch']:
         body = Miui(SignToken)
         data += "MIUI历史版本:\n"+body.Sign()
-    if SignToken['hykb']['switch']:
+    if SignToken['Hykb']['switch']:
         body = HaoYouKuaiBao(SignToken)
         data += "\n\n好游快爆:\n"+ body.Sign()
     if SignToken['XiaoHeiHe']['switch']:
@@ -34,7 +40,7 @@ def run():
     sum = f"\n\n本次运行时间{round(end-Begin,3)}秒"
     data = data + "\n" + sum
     # 推送消息
-    ts = Push(data,push)
+    ts = Push(data,config['Push'])
     ts.push()
 
     log.info(sum)

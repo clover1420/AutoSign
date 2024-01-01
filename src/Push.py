@@ -14,19 +14,19 @@ class Push():
     push ： 推送的配置
     """
     def __init__(self,msg,push) -> None:
-        self.qmsg_key = push['PushKey']['Qmsg']
-        self.Server_key = push['PushKey']['Server']
         self.PushMode = push['PushMode']
-        self.EnterpriseId = push['PushKey']['Epwc']['EnterpriseId']
-        self.AppId = push['PushKey']['Epwc']['AppId']
-        self.AppSecret = push['PushKey']['Epwc']['AppSecret']
-        self.UserUid = push['PushKey']['Epwc']['UserUid']
-        self.Dingtalk_token = push['PushKey']['Dingtalk']['token']
-        self.Dingtalk_secret = push['PushKey']['Dingtalk']['secret']
-        self.Dingtalk_atuser = push['PushKey']['Dingtalk']['atuser']
-        self.Dingtalk_atMobiles = push['PushKey']['Dingtalk']['atMobiles']
-        self.Dingtalk_isAtAll = push['PushKey']['Dingtalk']['isAtAll']
-        self.wxhookurl = push['PushKey']['wxhook']['url']
+        self.qmsg_key = push['Qmsg']['key']
+        self.Server_key = push['Server']['key']
+        self.EnterpriseId = push['Epwc']['EnterpriseId']
+        self.AppId = push['Epwc']['AppId']
+        self.AppSecret = push['Epwc']['AppSecret']
+        self.UserUid = push['Epwc']['UserUid']
+        self.Dingtalk_token = push['Dingtalk']['token']
+        self.Dingtalk_secret = push['Dingtalk']['secret']
+        self.Dingtalk_atuser = push['Dingtalk']['atuser']
+        self.Dingtalk_atMobiles = push['Dingtalk']['atMobiles']
+        self.Dingtalk_isAtAll = push['Dingtalk']['isAtAll']
+        self.wxhookurl = push['Wxhook']['url']
         self.msg = msg
 
     #qmsg酱推送
@@ -161,15 +161,15 @@ class Push():
     def push(self):
         if self.PushMode == "" or self.PushMode == "False":
             log.info("配置了不进行推送")
-        elif self.PushMode == "qmsg":
+        elif self.PushMode == "Qmsg":
             self.Qmsg()
-        elif self.PushMode == "server":
+        elif self.PushMode == "Server":
             self.Server()
-        elif self.PushMode == "epwc":
+        elif self.PushMode == "Epwc":
             self.Epwc()
-        elif self.PushMode == "dingtalk":
+        elif self.PushMode == "Dingtalk":
             self.Dingtalk()
-        elif self.PushMode == "wxhook":
+        elif self.PushMode == "Wxhook":
             self.wxwebhook()
         else:
             log.info("推送配置错误")
