@@ -46,3 +46,7 @@ SignToken:
   wyyyx:
     switch: False
     cookie: 
+  # 请在阿里云盘网页端输入后面代码获取：JSON.parse(localStorage.getItem("token")).refresh_token
+  Aliyundrive:
+    switch: False
+    token: 

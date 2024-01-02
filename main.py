@@ -3,6 +3,7 @@ from src.log import Log
 from src.Push import Push
 from src.Miui import Miui
 from src.SkyWingsCloud import Cloud
+from src.aliyundrive import Aliyundrive
 from src.hykb import HaoYouKuaiBao
 from src.Sign import XiaoHeiHe,JiaoYiMao,wyyyx
 log = Log()
@@ -24,8 +25,8 @@ def run():
         body = Miui(SignToken['MiUI'])
         data += "MIUI历史版本:\n"+body.Sign()
     if SignToken['Hykb']['switch']:
-        body = HaoYouKuaiBao(SignToken)
-        data += "\n\n好游快爆:\n"+ body.Sign()
+        body = HaoYouKuaiBao(SignToken['Hykb'])
+        data += "\n\n好游快爆:\n"+ body.sgin()
     if SignToken['XiaoHeiHe']['switch']:
         body = XiaoHeiHe(SignToken)
         data += "\n\n小黑盒:\n"+body.Sgin()
@@ -40,6 +41,10 @@ def run():
     if SignToken['wyyyx']['switch']:
         body = wyyyx(SignToken)
         data += "\n\n网易云游戏:\n"+body.Sgin()
+    # 阿里云盘
+    if SignToken['Aliyundrive']['switch']:
+        body = Aliyundrive(SignToken['Aliyundrive'])
+        data += "\n\n阿里云盘:\n"+body.sgin()
     # 结束时间
     end = time.time()
     sum = f"\n\n本次运行时间{round(end-Begin,3)}秒"
