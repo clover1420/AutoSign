@@ -7,7 +7,6 @@ log = Log()
 class Aliyundrive:
     def __init__(self, coofig):
         self.token = self.get_access_token(coofig['token'])
-        pass
 
     def get_access_token(self,token):
         access_token = ''
@@ -32,21 +31,18 @@ class Aliyundrive:
                 "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
             }
 
-            resp = requests.post(url, json=data_dict, headers=headers)
-            resp_json = resp.json()
-
-            #log.info(f"resp_json={resp_json}")
+            resp = requests.post(url, json=data_dict, headers=headers).json()
 
             token = {}
-            token['access_token'] = resp_json.get('access_token', "")
-            token['refresh_token'] = resp_json.get('refresh_token', "")
-            token['expire_time'] = resp_json.get('expire_time', "")
+            token['access_token'] = resp['access_token']
             access_token = token['access_token']
         except Exception as e:
             log.error(f"获取异常:{e}")
 
         return access_token
     
+
+    # 获取奖励
     def get_reward(self, day):
         try:
             token = self.token
@@ -60,12 +56,10 @@ class Aliyundrive:
                 'signInDay': day
             }
 
-            resp = requests.post(url, json=body, headers=headers)
+            resp = requests.post(url, json=body, headers=headers).json()
 
-            resp_json = resp.json()
-            result = resp_json.get('result', {})
-            name = result.get('name', '')
-            description = result.get('description', '')
+            name = resp['result']['name']
+            description = resp['result']['description']
             return {'name': name, 'description': description}
         except Exception as e:
             log.error(f"获取签到奖励异常={e}")
@@ -73,9 +67,11 @@ class Aliyundrive:
         return {'name': 'null', 'description': 'null'}
     
 
-    def sgin(self):
-
-        url = 'https://member.aliyundrive.com/v1/activity/sign_in_list'
+    # 签到
+    def sign_in(self):
+        url = "https://member.aliyundrive.com/v2/activity/sign_in_info"
+        #url = 'https://member.aliyundrive.com/v2/activity/sign_in_list'
+        #url = 'https://member.aliyundrive.com/v1/activity/sign_in_list'
         headers = {
             "Content-Type": "application/json",
             "Authorization": self.token,
@@ -84,29 +80,31 @@ class Aliyundrive:
         body = {}
 
         resp = requests.post(url, json=body, headers=headers).json()
+        return resp
+    
 
-        if resp['code'] == "AccessTokenInvalid":
-                log.info(f"请检查token是否正确")
-        elif resp['code'] is None:
-            result = resp['result']
-            if len(result['signInLogs']) > 0:
-                for i in result['signInLogs']:
-                    if i['status'] == "":
-                        log.info("签到信息获取异常")
-                    elif i['status'] == "miss":
-                        pass
-                        #log.warning(f"第{i['day']}天未打卡")
-                    elif i['status'] == "normal":
-                        if not i['isReward']:
-                            reward = self.get_reward(i['day'])
-                        else:
-                            reward = i['reward']
-                        if reward:
-                            name = reward['name']
-                            description = reward['description']
-                        else:
-                            name = '无奖励'
-                            description = ''
-                        today_info = '✅' if i['day'] == result['signInCount'] else '☑'
-                        log_info = f"{today_info}打卡第{i['day']}天，获得奖励：**[{name}->{description}]**"
+    def sgin(self):
+        
+        # 签到
+        resp = self.sign_in()
+
+        if resp['success']:
+            if not resp['result']['isSignIn']:
+                reward = self.get_reward(resp['result']['signInDay'])
+                if reward['name'] != 'null':
+                    name = reward['name']
+                    description = reward['description']
+                else:
+                    name = '无奖励'
+                    description = ''
+                #today_info = '✅' if i['day'] == result['signInCount'] else '☑'
+                log.info(f"✅打卡第{resp['result']['day']}天，获得奖励：**[{name}#->{description}]**")
+                log_info = f"✅打卡第{resp['result']['day']}天，获得奖励：**[{name}#->{description}]**"#->{description}]**"
+            else:
+                log.info(f"❌未打卡，请手动打卡")
+                log_info = f"❌打卡第{resp['result']['day']}天: 获得奖励：失败**"#->{description}]**"
+        else:
+            log.info(f"签到失败，请检查token是否正确")
+            log_info = f"❌签到失败，请检查token是否正确"
+
         return log_info

@@ -128,9 +128,9 @@ class Cloud():
             "Accept-Encoding": "gzip, deflate",
         }
         # 签到
-        response = s.get(surl, headers=headers)
-        netdiskBonus = response.json()['netdiskBonus']
-        if response.json()['isSign'] == "false":
+        response = s.get(surl, headers=headers).json()
+        netdiskBonus = response['netdiskBonus']
+        if not response['isSign']:
             log.info(f"天翼云盘:签到成功，获得：{netdiskBonus}M空间")
             message =  f"签到成功，获得：{netdiskBonus}M空间"
         else:

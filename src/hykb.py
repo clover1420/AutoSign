@@ -81,7 +81,7 @@ class HaoYouKuaiBao():
             response = requests.post(url, headers=self.headers, data=data).json()
             if response['key']  == 'ok':
                 log.info("好游快爆-浇水成功")
-                return 1, response['sign']['sign_now_bmh']
+                return 1, response['sign']['add_baomihua']
             elif response['key'] == '1001':
                 log.info("好游快爆-今日已浇水")
                 return 0, 0
@@ -90,6 +90,7 @@ class HaoYouKuaiBao():
                 return -1, 0
         except Exception as e:
             log.info("好游快爆-浇水出现错误：{}".format(e))
+            return -1, 0
  
     # def buyseeds(self):
     #     """购买种子
