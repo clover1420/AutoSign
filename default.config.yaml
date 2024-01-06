@@ -28,7 +28,7 @@ SignToken:
     cookie:
   MiUI:
     switch: False
-    user:
+    username:
     password:
   XiaoHeiHe:
     switch: False

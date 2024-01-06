@@ -159,7 +159,7 @@ class Push():
 
         
     def push(self):
-        if self.PushMode == "" or self.PushMode == "False":
+        if self.PushMode == "" or not self.PushMode:
             log.info("配置了不进行推送")
         elif self.PushMode == "Qmsg":
             self.Qmsg()

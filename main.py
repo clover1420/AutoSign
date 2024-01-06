@@ -35,8 +35,8 @@ def run():
         data += "\n\n交易猫:\n"+body.Sgin()
 
     # 天翼云盘签到
-    if SignToken['tyyp']['switch']:
-        body = Cloud(SignToken['tyyp'])
+    if SignToken['Tyyp']['switch']:
+        body = Cloud(SignToken['Tyyp'])
         data += "\n\n天翼云盘:\n"+body.sgin()
     if SignToken['wyyyx']['switch']:
         body = wyyyx(SignToken)

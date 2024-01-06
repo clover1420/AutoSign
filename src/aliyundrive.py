@@ -84,7 +84,6 @@ class Aliyundrive:
     
 
     def sgin(self):
-        
         # 签到
         resp = self.sign_in()
 
@@ -101,8 +100,10 @@ class Aliyundrive:
                 log.info(f"✅打卡第{resp['result']['day']}天，获得奖励：**[{name}#->{description}]**")
                 log_info = f"✅打卡第{resp['result']['day']}天，获得奖励：**[{name}#->{description}]**"#->{description}]**"
             else:
-                log.info(f"❌未打卡，请手动打卡")
-                log_info = f"❌打卡第{resp['result']['day']}天: 获得奖励：失败**"#->{description}]**"
+                self.sgin()
+                # log.info(f"❌未打卡，请手动打卡")
+                # log_info = f"❌打卡第{resp['result']['day']}天: 获得奖励：失败**"#->{description}]**"
+                
         else:
             log.info(f"签到失败，请检查token是否正确")
             log_info = f"❌签到失败，请检查token是否正确"

@@ -81,7 +81,7 @@ class HaoYouKuaiBao():
             response = requests.post(url, headers=self.headers, data=data).json()
             if response['key']  == 'ok':
                 log.info("好游快爆-浇水成功")
-                return 1, response['sign']['add_baomihua']
+                return 1, response['add_baomihua']
             elif response['key'] == '1001':
                 log.info("好游快爆-今日已浇水")
                 return 0, 0
