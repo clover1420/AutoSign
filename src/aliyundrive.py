@@ -7,6 +7,11 @@ log = Log()
 class Aliyundrive:
     def __init__(self, coofig):
         self.token = self.get_access_token(coofig['token'])
+        self.headers = {
+                "Content-Type": "application/json",
+                "Authorization": self.token,
+                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 D/C501C6D2-FAF6-4DA8-B65B-7B8B392901EB"
+            }
 
     def get_access_token(self,token):
         access_token = ''
@@ -45,26 +50,13 @@ class Aliyundrive:
     # 获取奖励
     def get_reward(self, day):
         try:
-            token = self.token
             url = 'https://member.aliyundrive.com/v1/activity/sign_in_reward'
-            headers = {
-                "Content-Type": "application/json",
-                "Authorization": token,
-                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 D/C501C6D2-FAF6-4DA8-B65B-7B8B392901EB"
-            }
             body = {
                 'signInDay': day
             }
-
-            resp = requests.post(url, json=body, headers=headers).json()
-
-            name = resp['result']['name']
-            description = resp['result']['description']
-            return {'name': name, 'description': description}
+            requests.post(url, json=body, headers=self.headers).json()
         except Exception as e:
             log.error(f"获取签到奖励异常={e}")
-
-        return {'name': 'null', 'description': 'null'}
     
 
     # 签到
@@ -72,44 +64,37 @@ class Aliyundrive:
         url = "https://member.aliyundrive.com/v2/activity/sign_in_info"
         #url = 'https://member.aliyundrive.com/v2/activity/sign_in_list'
         #url = 'https://member.aliyundrive.com/v1/activity/sign_in_list'
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": self.token,
-            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 D/C501C6D2-FAF6-4DA8-B65B-7B8B392901EB"
-        }
         body = {}
-
-        resp = requests.post(url, json=body, headers=headers).json()
+        resp = requests.post(url, json=body, headers=self.headers).json()
         return resp
+    
+    # 是否领取了奖励
+    def isReward(self):
+        url = "https://member.aliyundrive.com/v1/activity/sign_in_goods"
+        body = {}
+        resp = requests.post(url, json=body, headers=self.headers).json()
+        return resp['result']['isReward']
     
 
     def sgin(self):
-        Isresgin = True
-
         # 签到
         resp = self.sign_in()
-
         if resp['success']:
-            if not resp['result']['isSignIn']:
-                reward = self.get_reward(resp['result']['signInDay'])
-                if reward['name'] != 'null':
-                    name = reward['name']
-                    description = reward['description']
+            if resp['result']['isSignIn']:
+                self.get_reward(resp['result']['signInDay'])
+                content = f"✅打卡第{resp['result']['day']}天，获得奖励：**[{resp['result']['rewards'][0]['name']}]**"
+                log.info(content)
+            elif not resp['result']['isSignIn']:
+                if not self.isReward():
+                    self.get_reward(resp['result']['signInDay'])
+                    content = f"✅第{resp['result']['day']}天已签到: 获得奖励：**[{resp['result']['rewards'][0]['name']}]**"
+                    log.info(content)
                 else:
-                    name = '无奖励'
-                    description = ''
-                #today_info = '✅' if i['day'] == result['signInCount'] else '☑'
-                log.info(f"✅打卡第{resp['result']['day']}天，获得奖励：**[{name}#->{description}]**")
-                log_info = f"✅打卡第{resp['result']['signInDay']}天，获得奖励：**[{name}#->{description}]**"#->{description}]**"
-            else:
-                if Isresgin:
-                    self.sgin()
-                    Isresgin = False
-                log.info(f"❌未打卡，请手动打卡")
-                log_info = f"❌打卡第{resp['result']['signInDay']}天: 获得奖励：失败**"#->{description}]**"
-                
+                    content = f"🔁第{resp['result']['day']}天已签到: 已获得奖励：**[{resp['result']['rewards'][0]['name']}]**"
+                    log.info(content)     
         else:
-            log.info(f"签到失败，请检查token是否正确")
-            log_info = f"❌签到失败，请检查token是否正确"
+            content = f"❌签到失败，请检查token是否正确"
+            log.info(content)
+            
 
-        return log_info
+        return content
