@@ -54,9 +54,11 @@ class Aliyundrive:
             body = {
                 'signInDay': day
             }
-            requests.post(url, json=body, headers=self.headers).json()
+            rep = requests.post(url, json=body, headers=self.headers).json()
+            return rep['success']
         except Exception as e:
             log.error(f"获取签到奖励异常={e}")
+            return False
     
 
     # 签到
@@ -79,18 +81,27 @@ class Aliyundrive:
     def sgin(self):
         # 签到
         resp = self.sign_in()
+
+        reward_name = resp['result']['rewards'][0]['name']
+        sgin_day = resp['result']['day']
         if resp['success']:
             if resp['result']['isSignIn']:
-                self.get_reward(resp['result']['signInDay'])
-                content = f"✅打卡第{resp['result']['day']}天，获得奖励：**[{resp['result']['rewards'][0]['name']}]**"
-                log.info(content)
-            elif not resp['result']['isSignIn']:
-                if not self.isReward():
-                    self.get_reward(resp['result']['signInDay'])
-                    content = f"✅第{resp['result']['day']}天已签到: 获得奖励：**[{resp['result']['rewards'][0]['name']}]**"
+                if self.get_reward(resp['result']['signInDay']):
+                    content = f"✅打卡第{sgin_day}天，获得奖励：**[{reward_name}]**"
                     log.info(content)
                 else:
-                    content = f"🔁第{resp['result']['day']}天已签到: 已获得奖励：**[{resp['result']['rewards'][0]['name']}]**"
+                    content = f"✅打卡第{sgin_day}天，获得奖励：**[ 失败 ]**"
+                    log.info(content)
+            elif not resp['result']['isSignIn']:
+                if not self.isReward():
+                    if self.get_reward(resp['result']['signInDay']):
+                        content = f"✅第{sgin_day}天已签到: 获得奖励：**[{reward_name}]**"
+                        log.info(content)
+                    else:
+                        content = f"✅第{sgin_day}天已签到: 获得奖励：**[ 失败 ]**"
+                        log.info(content)
+                else:
+                    content = f"🔁第{sgin_day}天已签到: 已获得奖励：**[{reward_name}]**"
                     log.info(content)     
         else:
             content = f"❌签到失败，请检查token是否正确"

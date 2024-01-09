@@ -47,8 +47,8 @@ def run():
         data += "\n\n阿里云盘:\n"+body.sgin()
     # 结束时间
     end = time.time()
-    sum = f"\n\n本次运行时间{round(end-Begin,3)}秒"
-    data = data + "\n" + sum
+    sum = f"本次运行时间{round(end-Begin,3)}秒"
+    data = data + "\n\n\n" + sum
     # 推送消息
     ts = Push(data,config['Push'])
     ts.push()
