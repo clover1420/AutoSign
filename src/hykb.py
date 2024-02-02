@@ -116,7 +116,7 @@ class HaoYouKuaiBao():
                     b = self.plant()
                     if b == -1:
                         info = info+"播种失败，没有种子\n"
-                    elif b == 0:
+                    elif b == 1:
                         info = info+"播种成功\n"
                         # 浇水
                         data = self.watering()
@@ -136,7 +136,7 @@ class HaoYouKuaiBao():
                 b = self.plant()
                 if b == -1:
                     info = info+"播种失败，没有种子\n"
-                elif b == 0:
+                elif b == 1:
                     info = info+"播种成功\n"
                     # 浇水
                     data = self.watering()

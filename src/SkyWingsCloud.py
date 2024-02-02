@@ -3,7 +3,6 @@ import time
 import requests
 import rsa
 import base64
-import hashlib
 from src.log import Log
 
 log = Log()

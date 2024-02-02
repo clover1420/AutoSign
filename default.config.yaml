@@ -50,3 +50,7 @@ SignToken:
   Aliyundrive:
     switch: False
     token: 
+  # 明日方舟配置 打开森空岛网页 登录账号, 打开https://web-api.skland.com/account/info/hg, 复制 content 的值
+  Arknights:
+    switch: False
+    token: 
