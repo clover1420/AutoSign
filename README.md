@@ -126,8 +126,8 @@
 
 1. 用手机进行抓包复制请求体里面的的数据填入好游快爆的cookie
 <p align="center">
-    <img src="https://www.clover1420.top/img/a1.jpg!/format/webp/lossless/true" width="auto" height="200">
-    <img src="https://www.clover1420.top/img/a2.jpg!/format/webp/lossless/true" width="auto" height="200">
+    <img src="https://www.fhrf.top/img/a1.jpg!/format/webp/lossless/true" width="auto" height="200">
+    <img src="https://www.fhrf.top/img/a2.jpg!/format/webp/lossless/true" width="auto" height="200">
 </p>
 
 
