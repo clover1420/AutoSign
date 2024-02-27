@@ -44,7 +44,7 @@
     <td><a href="https://www.xiaoheihe.cn/home">小黑盒</a></td>
     <td>✅</td>
     <td>❌</td>
-    <td>✅</td>
+    <td>❌</td>
     <td>每日签到得盒币</td>
   </tr>
   <tr>
